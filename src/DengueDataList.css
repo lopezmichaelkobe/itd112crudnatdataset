@@ -1,0 +1,87 @@
+/* DengueDataList.css */
+
+.dengue-data-list-container {
+    width: 100%;
+    max-width: 1200px; /* Adjust based on canvas size */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.edit-form input,
+.edit-form button {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.edit-form button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-form button:hover {
+    background-color: #357ABD;
+}
+
+.table-container {
+    overflow-x: auto; /* Allow horizontal scroll if needed */
+    width: 100%; /* Ensure it takes full width of container */
+}
+
+.dengue-data-table {
+    border-collapse: collapse;
+    min-width: 1000px; /* Set a minimum width for the table */
+    /* Optional: to ensure the table width goes beyond the container */
+}
+
+.dengue-data-table th,
+.dengue-data-table td {
+    border: 2px solid #ddd;
+    padding: 20px;
+    text-align: center;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.dengue-data-table th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.dengue-data-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.dengue-data-table td {
+    min-width: 100px; /* Ensure minimum width for readability */
+}
+
+.dengue-data-table .actions-column {
+    width: 10px; /* Adjust width to fit buttons */
+    text-align: center; /* Center align buttons */
+}
+
+.dengue-data-table button {
+    padding: 4px 6px; /* Reduce padding for smaller buttons */
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: #4a90e2;
+    margin: 0 1px; /* Space buttons from each other */
+    font-size: 0.95rem; /* Smaller font size */
+}
+
+.dengue-data-table button:hover {
+    background-color: #357ABD;
+}
