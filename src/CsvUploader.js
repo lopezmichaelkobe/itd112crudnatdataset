@@ -16,11 +16,11 @@ const chunkArray = (array, chunkSize) => {
 // Function to handle batch upload
 const handleBatchUpload = async (dataArray) => {
   const batch = writeBatch(db); // Create a Firestore batch instance
-  const dengueCollection = collection(db, "dengueData");
+  const natCollection = collection(db, "natData");
 
   for (const data of dataArray) {
-    const docId = `${data.location}_${data.date}`;
-    const docRef = doc(dengueCollection, docId);
+    const docId = `${data.respondents}_${data.age}`; // Adjust docId to fit the new structure
+    const docRef = doc(natCollection, docId);
     batch.set(docRef, data);
   }
 
@@ -45,15 +45,27 @@ const CsvUploader = () => {
         skipEmptyLines: true,
         complete: async (result) => {
           const csvData = result.data.slice(2).map((row, index) => {
-            if (row.length < 5) return null;
+            if (row.length < 11) return null; // Adjust based on number of columns
 
-            const formattedDate = new Date(row[3]).toISOString();
+            const iqValue = row[6];
+            const validIqValues = ["High", "Average", "Low"]; // Define valid IQ categories
+            if (!validIqValues.includes(iqValue)) {
+              setError(`Invalid IQ value "${iqValue}" at row ${index + 3}. Please use "High", "Average", or "Low".`);
+              return null; // Skip this row
+            }
+
             return {
-              location: row[0],
-              cases: Number(row[1]),
-              deaths: Number(row[2]),
-              date: formattedDate,
-              regions: row[4],
+              respondents: row[0],
+              age: Number(row[1]),
+              sex: row[2],
+              ethnic: row[3],
+              academic_performance: row[4],
+              academic_description: row[5],
+              iq: iqValue, // Use the categorical IQ value
+              type_school: row[7],
+              socio_economic_status: row[8],
+              study_habit: row[9],
+              nat_results: row[10],
               csvOrder: index + 1,
             };
           }).filter(row => row !== null);
@@ -78,28 +90,41 @@ const CsvUploader = () => {
 
   return (
     <div>
-      <h2>Upload Dengue Data CSV</h2>
+      <h2>Upload NAT Data CSV</h2>
+      <h3>Make sure to refresh the site after all of the necessary data have been successfully uploaded.</h3>
       <input type="file" accept=".csv" onChange={handleFileUpload} />
       {error && <p style={{ color: "red" }}>{error}</p>}
       {data.length > 0 && (
         <table>
           <thead>
             <tr>
-              <th>Location</th>
-              <th>Cases</th>
-              <th>Deaths</th>
-              <th>Date</th>
-              <th>Regions</th>
+              <th>Respondents</th>
+              <th>Age</th>
+              <th>Sex</th>
+              <th>Ethnic</th>
+              <th>Academic Performance</th>
+              <th>Academic Description</th>
+              <th>IQ</th>
+              <th>Type of School</th>
+              <th>Socio-Economic Status</th>
+              <th>Study Habit</th>
+              <th>NAT Results</th>
             </tr>
           </thead>
           <tbody>
             {data.map((row, index) => (
               <tr key={index}>
-                <td>{row.location}</td>
-                <td>{row.cases}</td>
-                <td>{row.deaths}</td>
-                <td>{new Date(row.date).toLocaleDateString()}</td>
-                <td>{row.regions}</td>
+                <td>{row.respondents}</td>
+                <td>{row.age}</td>
+                <td>{row.sex}</td>
+                <td>{row.ethnic}</td>
+                <td>{row.academic_performance}</td>
+                <td>{row.academic_description}</td>
+                <td>{row.iq}</td>
+                <td>{row.type_school}</td>
+                <td>{row.socio_economic_status}</td>
+                <td>{row.study_habit}</td>
+                <td>{row.nat_results}</td>
               </tr>
             ))}
           </tbody>

@@ -1,6 +1,6 @@
-/* DengueDataList.css */
+/* NatDataList.css */
 
-.dengue-data-list-container {
+.nat-data-list-container {
     width: 100%;
     max-width: 1200px; /* Adjust based on canvas size */
     margin: 0 auto;
@@ -40,39 +40,39 @@
     width: 100%; /* Ensure it takes full width of container */
 }
 
-.dengue-data-table {
+.nat-data-table {
     border-collapse: collapse;
     min-width: 1000px; /* Set a minimum width for the table */
     /* Optional: to ensure the table width goes beyond the container */
 }
 
-.dengue-data-table th,
-.dengue-data-table td {
+.nat-data-table th,
+.nat-data-table td {
     border: 2px solid #ddd;
     padding: 20px;
     text-align: center;
     white-space: nowrap; /* Prevent text wrapping */
 }
 
-.dengue-data-table th {
+.nat-data-table th {
     background-color: #f4f4f4;
     color: #333;
 }
 
-.dengue-data-table tr:nth-child(even) {
+.nat-data-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.dengue-data-table td {
+.nat-data-table td {
     min-width: 100px; /* Ensure minimum width for readability */
 }
 
-.dengue-data-table .actions-column {
+.nat-data-table .actions-column {
     width: 10px; /* Adjust width to fit buttons */
     text-align: center; /* Center align buttons */
 }
 
-.dengue-data-table button {
+.nat-data-table button {
     padding: 4px 6px; /* Reduce padding for smaller buttons */
     border: none;
     cursor: pointer;
@@ -82,6 +82,6 @@
     font-size: 0.95rem; /* Smaller font size */
 }
 
-.dengue-data-table button:hover {
+.nat-data-table button:hover {
     background-color: #357ABD;
 }
